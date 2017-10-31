@@ -10,21 +10,31 @@
 
 	<ul id="fruitList" >
 	</ul>
-	s
 	<input type="button" value="Debug" onclick="debug()">
 	<script>
 		var fruits = [];
-		var button = "<input type='button' value='Supprimer' onclick='supprimer()'>";
-
+		
 		function ajouter () {
 			var nomFruit =document.getElementById('newFruit').value;
 			var newLength = fruits.push(nomFruit);
-			document.getElementById("fruitList").innerHTML += "<li>"+fruits[newLength-1]+" "+button+"</li>";
+			show();
+			document.getElementById("newFruit").value = "";
+			
+			
 		}
 
-		function supprimer() {
-			var newLength = fruits.push(nomFruit);
-			var removedItem = fruits.splice(newLength-1);
+		function show(){
+			document.getElementById("fruitList").innerHTML= "";
+			for (var i = 0; i < fruits.length; i++) {
+				document.getElementById("fruitList").innerHTML += "<li>"+fruits[i]+" <input type='button' value='Supprimer' onclick='supprimer("+i+")'></li>";
+			}
+
+		}
+
+		function supprimer(pos) {
+			var removedItem = fruits.splice(pos, 1);
+
+			show();
 		}
 
 		function debug () {
